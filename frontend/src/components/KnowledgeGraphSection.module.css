@@ -1,0 +1,73 @@
+.section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 800px;
+  background-color: #030303;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.canvasWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.overlay {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  pointer-events: none; /* Let clicks pass through to canvas to allow orbit controls */
+}
+
+.title {
+  color: #ffffff;
+  font-family: 'Instrument Serif', serif;
+  font-size: 3.5rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  text-align: center;
+  margin: 0;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.8);
+  opacity: 0.9;
+}
+
+.button {
+  pointer-events: auto; /* Re-enable pointer events for the button */
+  background: #ffffff;
+  color: #000000;
+  border: none;
+  border-radius: 30px;
+  padding: 0.85rem 2.2rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.1);
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+  }
+}

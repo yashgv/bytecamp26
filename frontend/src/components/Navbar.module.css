@@ -19,7 +19,7 @@
   font-size: 1.8rem;
   font-weight: 400;
   letter-spacing: 0.05em;
-  color: #000000;
+  color: var(--accent);
 }
 
 .links {
@@ -37,10 +37,10 @@
 }
 
 .links a:hover {
-  color: #000000;
+  color: var(--accent);
 }
 
 .ctaLink {
-  color: #000000 !important;
+  color: var(--accent) !important;
   font-weight: 600;
 }

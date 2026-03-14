@@ -32,7 +32,7 @@
   font-size: 1.8rem;
   font-weight: 400;
   letter-spacing: 0.05em;
-  color: #000000;
+  color: var(--accent);
 }
 
 .tagline {
@@ -61,7 +61,7 @@
 }
 
 .col a:hover {
-  color: #000000;
+  color: var(--accent);
 }
 
 .colTitle {

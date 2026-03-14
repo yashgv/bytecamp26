@@ -32,6 +32,6 @@
 }
 
 .accent {
-  color: #000000;
+  color: var(--accent);
   font-weight: 600;
 }

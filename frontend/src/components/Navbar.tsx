@@ -12,7 +12,7 @@ export default function Navbar() {
         <a href="#features">Features</a>
         <a href="/graph">Graph View</a>
         <a href="#agent">Download Agent</a>
-        <a href="/scanning" className={styles.ctaLink}>Get Started →</a>
+        <a href="/analyze" className={styles.ctaLink}>Get Started →</a>
       </div>
     </nav>
   );

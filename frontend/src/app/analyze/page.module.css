@@ -238,10 +238,186 @@
   border-color: rgba(0,0,0,0.2);
 }
 
-/* Ensure right column flexes properly */
-.rightCol, .leftCol {
+/* Header Right & User Profile */
+.headerRight {
+  display: flex;
+  align-items: center;
+}
+
+.userProfile {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+}
+
+.logoutBtn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.logoutBtn:hover {
+  background: var(--surface-2);
+  color: var(--text-primary);
+  border-color: rgba(0,0,0,0.2);
+}
+
+/* Import Container (Vercel Style) */
+.importContainer {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  margin-top: 0.5rem;
+}
+
+.importHeader {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: var(--surface);
+}
+
+.accountSelector {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--text-primary);
+}
+
+.repoSearchWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchSmallIcon {
+  position: absolute;
+  left: 0.75rem;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.repoSearchInput {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem 0.5rem 2.2rem;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  outline: none;
+}
+
+.repoSearchInput:focus {
+  border-color: rgba(0,0,0,0.3);
+}
+
+/* Repo List */
+.repoList {
+  max-height: 400px;
+  overflow-y: auto;
+  background: var(--bg);
+}
+
+.repoItem {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.1s;
+}
+
+.repoItem:last-child {
+  border-bottom: none;
+}
+
+.repoItem:hover {
+  background: var(--surface);
+}
+
+.repoLogo {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.repoMainInfo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.repoName {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.repoDate {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.1rem;
+}
+
+.importRepoBtn {
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  margin-left: 1rem;
+}
+
+.importRepoBtn:hover {
+  opacity: 0.85;
+}
+
+.repoLoading, .noRepos {
+  padding: 3rem 1rem;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
 }
 
 @media (max-width: 1024px) {

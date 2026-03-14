@@ -24,7 +24,7 @@ export default function HeroSection() {
           to your SQL database — before a single line breaks production.
         </p>
         <div className={styles.ctas}>
-          <a href="#" className={styles.primaryBtn}>
+          <a href="/analyze" className={styles.primaryBtn}>
             Start Analyzing
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>

@@ -93,9 +93,7 @@ export default function ChatbotPage() {
         {!hasMessages && (
           <div className={styles.welcome}>
             <div className={styles.welcomeIcon}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
-              </svg>
+              <img src="/dna-logo.png" alt="DNA Logo" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
             </div>
             <h1 className={styles.welcomeTitle}>Your Personal Agent</h1>
             <p className={styles.welcomeSub}>

@@ -33,11 +33,11 @@ export default function FeaturesSection() {
   return (
     <section className={styles.section} id="features" ref={ref}>
       <div className={styles.container}>
-        <div className={`reveal-up ${isIntersecting ? "active" : ""} ${styles.header}`}>
+        <div className={`reveal-up ${isIntersecting ? "active" : ""} ${styles.header}`} style={{ transitionDelay: "210ms" }}>
           <span className={styles.eyebrow}>Key Features</span>
           <h2 className={styles.title}>Everything you need to<br />ship with confidence</h2>
         </div>
-        <div className={`reveal-up ${isIntersecting ? "active" : ""} ${styles.grid}`} style={{ transitionDelay: "150ms" }}>
+        <div className={`reveal-up ${isIntersecting ? "active" : ""} ${styles.grid}`} style={{ transitionDelay: "490ms" }}>
           {features.map((f) => (
             <div key={f.num} className={styles.card}>
               <div className={styles.cardTop}>

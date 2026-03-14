@@ -43,7 +43,7 @@ export default function GraphMappingSection() {
   return (
     <section className={styles.section} id="mapping" ref={ref}>
       <div className={styles.container}>
-        <div className={`reveal-up ${isIntersecting ? "active" : ""} ${styles.header}`}>
+        <div className={`reveal-up ${isIntersecting ? "active" : ""} ${styles.header}`} style={{ transitionDelay: "210ms" }}>
           <span className={styles.eyebrow}>Live Dependency Graph</span>
           <h2 className={styles.title}>See Every Connection,<br />Across Every Layer</h2>
           <p className={styles.desc}>
@@ -52,7 +52,7 @@ export default function GraphMappingSection() {
           </p>
         </div>
 
-        <div className={`reveal-up ${isIntersecting ? "active" : ""} ${styles.graphBox}`} style={{ transitionDelay: "200ms" }}>
+        <div className={`reveal-up ${isIntersecting ? "active" : ""} ${styles.graphBox}`} style={{ transitionDelay: "560ms" }}>
           <div className={styles.graphInner}>
             <svg
               ref={svgRef}
@@ -101,7 +101,7 @@ export default function GraphMappingSection() {
                   <text
                     x={node.x} y={node.y + 4.5}
                     fontSize="2.8"
-                    fill="rgba(255,255,255,0.6)"
+                    fill="rgba(0,0,0,0.75)"
                     textAnchor="middle"
                     fontFamily="Inter, sans-serif"
                   >

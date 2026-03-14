@@ -18,7 +18,7 @@ export default function AgentSection() {
   return (
     <section className={styles.section} id="agent" ref={ref}>
       <div className={styles.container}>
-        <div className={`reveal-up ${isIntersecting ? "active" : ""} ${styles.left}`}>
+        <div className={`reveal-up ${isIntersecting ? "active" : ""} ${styles.left}`} style={{ transitionDelay: "210ms" }}>
           <span className={styles.eyebrow}>The Downloadable Agent</span>
           <h2 className={styles.title}>Take it Offline.</h2>
           <p className={styles.desc}>
@@ -44,7 +44,7 @@ export default function AgentSection() {
           </div>
         </div>
 
-        <div className={`reveal-up ${isIntersecting ? "active" : ""} ${styles.right}`} style={{ transitionDelay: "200ms" }}>
+        <div className={`reveal-up ${isIntersecting ? "active" : ""} ${styles.right}`} style={{ transitionDelay: "560ms" }}>
           <div className={styles.terminal}>
             <div className={styles.terminalBar}>
               <span className={styles.dot} style={{ background: "#ff5f57" }} />

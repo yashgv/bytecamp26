@@ -32,7 +32,8 @@ export default function HalftoneBackground() {
 
     const init = () => {
       const rect = canvas.parentElement?.getBoundingClientRect();
-      canvas.width = rect?.width || window.innerWidth;
+      // Full viewport width, but only hero section height
+      canvas.width = window.innerWidth;
       canvas.height = rect?.height || window.innerHeight;
       dotsRef.current = [];
       const cols = Math.ceil(canvas.width / SPACING) + 1;
@@ -48,7 +49,7 @@ export default function HalftoneBackground() {
             currentRadius: BASE_RADIUS,
             targetRadius: BASE_RADIUS,
             angle: Math.random() * Math.PI * 2,
-            angleSpeed: 0.05 + Math.random() * 0.05,
+            angleSpeed: 0.008 + Math.random() * 0.008, // Slower swivel
           });
         }
       }
@@ -98,7 +99,8 @@ export default function HalftoneBackground() {
 
     const onMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
-      mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+      // clientX maps directly since canvas spans full width at left: 0
+      mouseRef.current = { x: e.clientX, y: e.clientY - rect.top };
     };
 
     const onResize = () => {
@@ -125,8 +127,9 @@ export default function HalftoneBackground() {
       style={{
         position: "absolute",
         top: 0,
-        left: 0,
-        width: "100%",
+        left: "50%",
+        transform: "translateX(-50%)",
+        width: "100vw",
         height: "100%",
         zIndex: 0,
         pointerEvents: "none",

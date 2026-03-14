@@ -1,12 +1,29 @@
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import styles from './page.module.css';
 
 export default function AnalyzePage() {
+  const [repoUrl, setRepoUrl] = useState("");
+  const router = useRouter();
+
+  const handleAnalyze = () => {
+    if (repoUrl.trim()) {
+      router.push("/scanning");
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      handleAnalyze();
+    }
+  };
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <button className={styles.backBtn}>← Back</button>
+        <button className={styles.backBtn} onClick={() => router.push('/')}>← Back</button>
         <div className={styles.headerCenter}>synapse</div>
         <div className={styles.profileIcon}></div>
       </header>
@@ -27,7 +44,19 @@ export default function AnalyzePage() {
             type="text" 
             placeholder="Enter a Git repository URL to analyze..." 
             className={styles.searchInput}
+            value={repoUrl}
+            onChange={(e) => setRepoUrl(e.target.value)}
+            onKeyDown={handleKeyDown}
           />
+          <button 
+            className={styles.planeBtn} 
+            onClick={handleAnalyze}
+            disabled={!repoUrl.trim()}
+          >
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+          </button>
         </div>
 
         <div className={styles.grid}>

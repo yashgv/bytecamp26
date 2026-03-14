@@ -9,7 +9,7 @@ export default function Navbar() {
       <div className={styles.links}>
         <a href="#features">Features</a>
         <a href="#agent">Download Agent</a>
-        <a href="#" className={styles.ctaLink}>Get Started →</a>
+        <a href="/scanning" className={styles.ctaLink}>Get Started →</a>
       </div>
     </nav>
   );

@@ -156,8 +156,9 @@ export default function GraphPage() {
         padding: '20px 30px', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.1)',
         color: '#fff', boxShadow: '0 8px 32px rgba(0,0,0,0.4)'
       }}>
-        <h1 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '800', letterSpacing: '-0.5px' }}>
-          <span style={{ color: '#00d4ff' }}>SYNAPSE</span> GRAPH
+        <h1 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '800', letterSpacing: '-0.5px', display: 'flex', alignItems: 'center' }}>
+          <img src="/synapselogo.png" alt="SYNAPSE" style={{ height: '20px', marginRight: '8px', filter: 'invert(1) brightness(2)' }} />
+          <span style={{ color: '#00d4ff' }}>GRAPH</span>
         </h1>
         <p style={{ margin: '4px 0 0 0', fontSize: '0.75rem', opacity: 0.5, textTransform: 'uppercase', letterSpacing: '1px' }}>
           Cytoscape Intelligence Engine

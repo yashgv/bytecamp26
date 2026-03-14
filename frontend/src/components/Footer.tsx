@@ -8,7 +8,9 @@ export default function Footer() {
       <div className={styles.container}>
         <div className={styles.top}>
           <div className={styles.brand}>
-            <span className={styles.logo}>SYNAPSE</span>
+            <span className={styles.logo}>
+              <img src="/synapselogo.png" alt="SYNAPSE" style={{ height: '32px', width: 'auto' }} />
+            </span>
             <p className={styles.tagline}>
               Map the invisible bridges in your code.
             </p>

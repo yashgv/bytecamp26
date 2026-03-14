@@ -24,7 +24,9 @@ export default function AnalyzePage() {
     <div className={styles.container}>
       <header className={styles.header}>
         <button className={styles.backBtn} onClick={() => router.push('/')}>← Back</button>
-        <div className={styles.headerCenter}>synapse</div>
+        <div className={styles.headerCenter}>
+          <img src="/synapselogo.png" alt="SYNAPSE" style={{ height: '32px', width: 'auto' }} />
+        </div>
         <div className={styles.profileIcon}></div>
       </header>
       

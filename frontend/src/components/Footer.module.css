@@ -1,0 +1,89 @@
+.footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  padding: 4rem 2rem 2rem;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-width: 220px;
+}
+
+.logo {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: #000000;
+}
+
+.tagline {
+  font-size: 0.82rem;
+  color: rgba(0,0,0,0.5);
+  line-height: 1.5;
+}
+
+.links {
+  display: flex;
+  gap: 4rem;
+  flex-wrap: wrap;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.col a {
+  font-size: 0.83rem;
+  color: rgba(0,0,0,0.6);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.col a:hover {
+  color: #000000;
+}
+
+.colTitle {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: rgba(0,0,0,0.8);
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  font-size: 0.78rem;
+  color: rgba(0,0,0,0.4);
+}
+
+.accent {
+  color: rgba(0,0,0,0.6);
+  font-weight: 600;
+}

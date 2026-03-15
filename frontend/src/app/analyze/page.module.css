@@ -32,6 +32,7 @@
   align-items: center;
   transition: color 0.2s;
 }
+
 .backBtn:hover {
   color: var(--text-primary);
 }
@@ -55,7 +56,8 @@
 /* Main Layout */
 .main {
   width: 100%;
-  padding: 3rem 4rem; /* Removed max-width, expanded padding to use full width */
+  padding: 3rem 4rem;
+  /* Removed max-width, expanded padding to use full width */
   flex: 1;
 }
 
@@ -87,12 +89,12 @@
   gap: 0.5rem;
   cursor: pointer;
   transition: all 0.2s;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
 .proBtn:hover {
   background: var(--surface-2);
-  border-color: rgba(0,0,0,0.2);
+  border-color: rgba(0, 0, 0, 0.2);
 }
 
 .proIcon {
@@ -106,14 +108,15 @@
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 0.8rem 1.2rem;
+  padding: 1.2rem 1.5rem;
   margin-bottom: 3rem;
   transition: border-color 0.2s, box-shadow 0.2s;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
+
 .searchContainer:focus-within {
   border-color: rgba(0, 0, 0, 0.3);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   background: var(--bg);
 }
 
@@ -132,31 +135,9 @@
   font-size: 1.1rem;
   outline: none;
 }
+
 .searchInput::placeholder {
   color: var(--text-muted);
-}
-
-.planeBtn {
-  background: transparent;
-  color: var(--text-primary);
-  border: none;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: opacity 0.2s, transform 0.2s;
-}
-
-.planeBtn:hover:not(:disabled) {
-  opacity: 0.9;
-  transform: scale(1.05);
-}
-
-.planeBtn:disabled {
-  opacity: 0.2;
-  cursor: not-allowed;
 }
 
 /* Grid Layout */
@@ -185,11 +166,13 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  flex: 1; /* Stretch to fill available height */
+  flex: 1;
+  /* Stretch to fill available height */
   min-height: 250px;
 }
 
-.githubLargeIcon, .historyIcon {
+.githubLargeIcon,
+.historyIcon {
   color: var(--text-primary);
   margin-bottom: 1.5rem;
   opacity: 0.8;
@@ -217,6 +200,7 @@
   align-items: center;
   gap: 0.5rem;
 }
+
 .actionBtnPrimary:hover {
   opacity: 0.9;
   transform: translateY(-1px);
@@ -233,9 +217,18 @@
   cursor: pointer;
   transition: all 0.2s;
 }
+
 .actionBtnSecondary:hover {
   background: var(--surface-2);
-  border-color: rgba(0,0,0,0.2);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Right Header actions */
+.rightHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
 }
 
 /* Header Right & User Profile */
@@ -272,7 +265,7 @@
 .logoutBtn:hover {
   background: var(--surface-2);
   color: var(--text-primary);
-  border-color: rgba(0,0,0,0.2);
+  border-color: rgba(0, 0, 0, 0.2);
 }
 
 /* Import Container (Vercel Style) */
@@ -283,7 +276,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
   margin-top: 0.5rem;
 }
 
@@ -334,7 +327,7 @@
 }
 
 .repoSearchInput:focus {
-  border-color: rgba(0,0,0,0.3);
+  border-color: rgba(0, 0, 0, 0.3);
 }
 
 /* Repo List */
@@ -413,7 +406,8 @@
   opacity: 0.85;
 }
 
-.repoLoading, .noRepos {
+.repoLoading,
+.noRepos {
   padding: 3rem 1rem;
   text-align: center;
   color: var(--text-secondary);
@@ -425,7 +419,60 @@
     grid-template-columns: 1fr;
     gap: 2rem;
   }
+
   .main {
     padding: 2rem;
   }
+}
+
+.planeBtn {
+  background: transparent;
+  color: var(--text-primary);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s, transform 0.2s;
+  padding: 0.5rem;
+}
+
+.planeBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.planeBtn:not(:disabled):hover {
+  opacity: 0.8;
+  transform: translateX(2px);
+}
+
+.loader {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border);
+  border-bottom-color: var(--text-primary);
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.errorMessage {
+  color: #ef4444;
+  font-size: 0.9rem;
+  margin-top: -2rem;
+  margin-bottom: 2rem;
+  padding-left: 1rem;
 }

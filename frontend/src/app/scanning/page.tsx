@@ -1,12 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./page.module.css";
 
-export default function ScanningPage() {
+function ScanningContent() {
   const [progress, setProgress] = useState(0);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const repoId = searchParams.get("repo_id");
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -15,12 +17,21 @@ export default function ScanningPage() {
           clearInterval(timer);
           return 100;
         }
+          // The backend clones and indexes, we will just simulate progress here.
         return prev + (Math.random() * 5);
       });
     }, 150);
 
     return () => clearInterval(timer);
   }, []);
+
+  const handleContinue = () => {
+    if (repoId) {
+      router.push(`/chatbot?repo_id=${repoId}`);
+    } else {
+      router.push("/chatbot");
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -54,12 +65,20 @@ export default function ScanningPage() {
         {progress >= 100 && (
           <button 
             className={styles.continueBtn}
-            onClick={() => router.push("/chatbot")}
+            onClick={handleContinue}
           >
             Enter Chatbot
           </button>
         )}
       </div>
     </div>
+  );
+}
+
+export default function ScanningPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ScanningContent />
+    </Suspense>
   );
 }

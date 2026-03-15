@@ -46,6 +46,21 @@ async def analyze_github_repo(request: GithubRepoRequest, background_tasks: Back
         repo_id=repo_id
     )
 
+@router.post("/import", response_model=GithubRepoResponse, status_code=status.HTTP_202_ACCEPTED)
+async def import_github_repo(request: GithubRepoRequest, background_tasks: BackgroundTasks):
+    url_str = str(request.github_url)
+    if not url_str.startswith("https://github.com/"):
+        raise HTTPException(status_code=400, detail="Provided URL must be a valid GitHub repository URL")
+
+    repo_id = hashlib.md5(url_str.encode()).hexdigest()
+    background_tasks.add_task(clone_repo_in_docker, url_str, repo_id)
+
+    return GithubRepoResponse(
+        message="GitHub repository queued! It will be cloned and indexed in the background.",
+        url=url_str,
+        repo_id=repo_id
+    )
+
 @router.post("/chat/{repo_id}", response_model=ChatResponse)
 def chat_with_repo(repo_id: str, request: ChatRequest):
     db_path = os.path.join(DB_DIR, repo_id)

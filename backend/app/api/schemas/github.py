@@ -8,6 +8,8 @@ class GithubRepoResponse(BaseModel):
     url: str
     repo_id: str | None = None
 
+
+
 class ChatRequest(BaseModel):
     query: str
 

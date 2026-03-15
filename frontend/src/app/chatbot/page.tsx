@@ -4,6 +4,8 @@ import { useState, useRef, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import ChatSidebar from "@/components/ChatSidebar";
 import styles from "./page.module.css";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface Message {
   id: number;
@@ -45,6 +47,7 @@ function ChatbotContent() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [showGraph, setShowGraph] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -59,6 +62,16 @@ function ChatbotContent() {
     if (!el) return;
     el.style.height = "auto";
     el.style.height = Math.min(el.scrollHeight, 160) + "px";
+  };
+
+  const handleQuickAction = (actionTitle: string, actionDesc: string) => {
+    if (actionTitle === "Graph Visualization") {
+      setShowGraph(true);
+      // Optional: send a passive message recording the action
+      setMessages((prev) => [...prev, { id: Date.now(), role: "user", content: "Opened Graph Visualization" }]);
+    } else {
+      sendMessage(actionDesc);
+    }
   };
 
   const sendMessage = async (text: string) => {
@@ -127,85 +140,100 @@ function ChatbotContent() {
       <ChatSidebar />
 
       <div className={styles.main}>
-        {/* Welcome / Quick actions */}
-        {!hasMessages && (
-          <div className={styles.welcome}>
-            <div className={styles.welcomeIcon}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /><rect x="3" y="14" width="7" height="7" />
-              </svg>
-            </div>
-            <h1 className={styles.welcomeTitle}>Your Personal Agent</h1>
-            <p className={styles.welcomeSub}>
-              Trained to understand your code and cater to your architecture needs.
-            </p>
+        {showGraph && (
+          <div className={styles.embeddedGraph}>
+            <button className={styles.closeEmbeddedBtn} title="Close Graph" onClick={() => setShowGraph(false)}>✕</button>
+            <iframe src={`/graph?repo_id=${repoId}`} className={styles.graphIframe} />
+          </div>
+        )}
 
-            <div className={styles.quickActions}>
-              {QUICK_ACTIONS.map((action) => (
-                <button
-                  key={action.id}
-                  className={styles.quickCard}
-                  onClick={() => sendMessage(action.desc)}
+        <div className={`${styles.chatWrapper} ${showGraph ? styles.withGraph : ""}`}>
+          {/* Welcome / Quick actions */}
+          {!hasMessages && (
+            <div className={styles.welcome}>
+              <div className={styles.welcomeIcon}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /><rect x="3" y="14" width="7" height="7" />
+                </svg>
+              </div>
+              <h1 className={styles.welcomeTitle}>Your Personal Agent</h1>
+              <p className={styles.welcomeSub}>
+                Trained to understand your code and cater to your architecture needs.
+              </p>
+
+              <div className={styles.quickActions}>
+                {QUICK_ACTIONS.map((action) => (
+                  <button
+                    key={action.id}
+                    className={styles.quickCard}
+                    onClick={() => handleQuickAction(action.title, action.desc)}
+                  >
+                    <span className={styles.quickIcon}>{action.icon}</span>
+                    <span className={styles.quickDesc}>{action.desc}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Message thread */}
+          {hasMessages && (
+            <div className={styles.messages}>
+              {messages.map((msg) => (
+                <div
+                  key={msg.id}
+                  className={`${styles.message} ${msg.role === "user" ? styles.userMessage : styles.aiMessage}`}
                 >
-                  <span className={styles.quickIcon}>{action.icon}</span>
-                  <span className={styles.quickDesc}>{action.desc}</span>
-                </button>
+                  {msg.role === "assistant" && (
+                    <div className={styles.aiAvatar}>S</div>
+                  )}
+                  <div className={styles.messageBubble}>
+                    {msg.role === "assistant" ? (
+                      <div className={styles.markdownContent}>
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
+                      </div>
+                    ) : (
+                      msg.content
+                    )}
+                  </div>
+                </div>
               ))}
-            </div>
-          </div>
-        )}
-
-        {/* Message thread */}
-        {hasMessages && (
-          <div className={styles.messages}>
-            {messages.map((msg) => (
-              <div
-                key={msg.id}
-                className={`${styles.message} ${msg.role === "user" ? styles.userMessage : styles.aiMessage}`}
-              >
-                {msg.role === "assistant" && (
+              {isTyping && (
+                <div className={`${styles.message} ${styles.aiMessage}`}>
                   <div className={styles.aiAvatar}>S</div>
-                )}
-                <div className={styles.messageBubble}>
-                  {msg.content}
+                  <div className={`${styles.messageBubble} ${styles.typing}`}>
+                    <span /><span /><span />
+                  </div>
                 </div>
-              </div>
-            ))}
-            {isTyping && (
-              <div className={`${styles.message} ${styles.aiMessage}`}>
-                <div className={styles.aiAvatar}>S</div>
-                <div className={`${styles.messageBubble} ${styles.typing}`}>
-                  <span /><span /><span />
-                </div>
-              </div>
-            )}
-            <div ref={messagesEndRef} />
-          </div>
-        )}
+              )}
+              <div ref={messagesEndRef} />
+            </div>
+          )}
 
-        {/* Input bar */}
-        <div className={styles.inputArea}>
-          <div className={styles.inputBox}>
-            <button className={styles.attachBtn} title="Attach context">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" /></svg>
-            </button>
-            <textarea
-              ref={textareaRef}
-              className={styles.textarea}
-              placeholder="Ask your personal agent..."
-              value={input}
-              rows={1}
-              onChange={(e) => { setInput(e.target.value); autoResize(); }}
-              onKeyDown={handleKeyDown}
-            />
-            <button
-              className={styles.sendBtn}
-              onClick={() => sendMessage(input)}
-              disabled={!input.trim()}
-              aria-label="Send"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" /></svg>
-            </button>
+          {/* Input bar */}
+          <div className={styles.inputArea}>
+            <div className={styles.inputBox}>
+              <button className={styles.attachBtn} title="Attach context">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" /></svg>
+              </button>
+              <textarea
+                ref={textareaRef}
+                className={styles.textarea}
+                placeholder="Ask your personal agent..."
+                value={input}
+                rows={1}
+                onChange={(e) => { setInput(e.target.value); autoResize(); }}
+                onKeyDown={handleKeyDown}
+              />
+              <button
+                className={styles.sendBtn}
+                onClick={() => sendMessage(input)}
+                disabled={!input.trim()}
+                aria-label="Send"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" /></svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -10,7 +10,7 @@
 .main {
   flex: 1;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   overflow: hidden;
   position: relative;
 }
@@ -160,6 +160,74 @@
   color: #000;
 }
 
+/* ── Markdown Overrides ── */
+.markdownContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.markdownContent p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.markdownContent code {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.15rem 0.35rem;
+  border-radius: 4px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.85em;
+}
+
+.markdownContent pre {
+  background: #111;
+  color: #eee;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.85em;
+  margin: 0.2rem 0;
+}
+
+.markdownContent pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  border-radius: 0;
+}
+
+.markdownContent ul, .markdownContent ol {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.markdownContent a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.markdownContent a:hover {
+  text-decoration: underline;
+}
+
+.markdownContent table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.5rem 0;
+}
+
+.markdownContent th, .markdownContent td {
+  border: 1px solid rgba(0,0,0,0.1);
+  padding: 0.4rem 0.6rem;
+}
+
+.markdownContent th {
+  background: rgba(0,0,0,0.03);
+  font-weight: 600;
+}
+
 /* ── Input Bar ── */
 .inputArea {
   position: absolute;
@@ -229,3 +297,67 @@
   opacity: 0.2;
   cursor: default;
 }
+
+/* ── Chat Wrapper for splits ── */
+.chatWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.chatWrapper.withGraph {
+  flex: 0 0 450px;
+  border-left: 1px solid rgba(0,0,0,0.1);
+  background: #fdfdfd;
+}
+
+/* ── Embedded Graph Content ── */
+.embeddedGraph {
+  flex: 1;
+  position: relative;
+  background: #050505;
+  overflow: hidden;
+  animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.graphIframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #050505;
+}
+
+.closeEmbeddedBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 100;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #fff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.closeEmbeddedBtn:hover {
+  background: rgba(255, 50, 50, 0.4);
+  color: #ff4444;
+  border-color: rgba(255, 50, 50, 0.2);
+  transform: scale(1.05);
+}

@@ -8,8 +8,10 @@ __pycache__/
 
 # Virtual Environment
 venv/
+venv1/
 env/
 .venv/
+
 .env/
 
 # Environment Variables
@@ -43,3 +45,4 @@ htmlcov/
 .idea/
 *.swp
 *.swo
+

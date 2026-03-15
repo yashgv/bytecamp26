@@ -139,6 +139,63 @@ function ChatbotContent() {
     <div className={styles.layout}>
       <ChatSidebar />
 
+      {/* Secondary Explorer Panel (Simulated IDE context block) */}
+      <div className={styles.explorerPanel}>
+        <div className={styles.explorerHeader}>
+          <span>WORKSPACE</span>
+        </div>
+        <div className={styles.explorerContent}>
+          <div className={styles.explorerSection}>
+            <div className={styles.explorerSectionTitle}>FILES & CONTEXT</div>
+            <div 
+              className={styles.explorerItem} 
+              onClick={() => handleQuickAction("Analyze", "Summarize the dependencies in package.json")}
+            >
+              <span className={styles.fileIcon}>📄</span> package.json
+            </div>
+            <div 
+              className={styles.explorerItem}
+              onClick={() => handleQuickAction("Analyze", "What is the primary architectural structure in the src/ directory?")}
+            >
+              <span className={styles.folderIcon}>📁</span> src/
+            </div>
+            <div 
+              className={styles.explorerItem}
+              onClick={() => handleQuickAction("Analyze", "Break down the routing system in the app/ directory.")}
+            >
+              <span className={styles.folderIcon}>📁</span> app/
+            </div>
+            <div 
+              className={styles.explorerItem}
+              onClick={() => handleQuickAction("Analyze", "Provide an overview of the README.md for this project.")}
+            >
+              <span className={styles.fileIcon}>📄</span> README.md
+            </div>
+          </div>
+          <div className={styles.explorerSection}>
+            <div className={styles.explorerSectionTitle}>ACTIONS</div>
+            <div 
+              className={styles.explorerItemActive}
+              onClick={() => handleQuickAction("Graph Visualization", "")}
+            >
+              🔬 View Dependency Graph
+            </div>
+            <div 
+              className={styles.explorerItem}
+              onClick={() => handleQuickAction("Debug", "Find duplicate or redundant logic scattered across the files in this repo.")}
+            >
+              🐛 Debug Redundancies
+            </div>
+            <div 
+              className={styles.explorerItem}
+              onClick={() => handleQuickAction("Report", "Generate a full architectural report of the codebase.")}
+            >
+              📑 Architecture Report
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className={styles.main}>
         {showGraph && (
           <div className={styles.embeddedGraph}>
@@ -184,9 +241,6 @@ function ChatbotContent() {
                   key={msg.id}
                   className={`${styles.message} ${msg.role === "user" ? styles.userMessage : styles.aiMessage}`}
                 >
-                  {msg.role === "assistant" && (
-                    <div className={styles.aiAvatar}>S</div>
-                  )}
                   <div className={styles.messageBubble}>
                     {msg.role === "assistant" ? (
                       <div className={styles.markdownContent}>
@@ -202,7 +256,7 @@ function ChatbotContent() {
                 <div className={`${styles.message} ${styles.aiMessage}`}>
                   <div className={styles.aiAvatar}>S</div>
                   <div className={`${styles.messageBubble} ${styles.typing}`}>
-                    <span /><span /><span />
+                    <span></span><span></span><span></span>
                   </div>
                 </div>
               )}
